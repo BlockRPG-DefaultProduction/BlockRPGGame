@@ -9,10 +9,9 @@ public class BitShiftTileAction : AbstractTileAction
     {
         base.Invoke();
     }
-    public override IEnumerator Action()
+    public override void Action()
     {
         // First attack piece
-        yield return null;
         Complete();
     }
 }

@@ -9,7 +9,7 @@ public class MapManager : MonoBehaviour
     public int gridSize = 5;             // Kích thước lưới, ví dụ 4 hoặc 5
     public float tileSpacing = 1.1f;     // Khoảng cách giữa các tile
 
-    public float timeToGenerate = 0.05f; // Thời gian tạo tile
+    public float timeToGenerate = 0.01f; // Thời gian tạo tile
 
     private List<GameObject> groundTiles = new List<GameObject>();
     private PlayerBehavior player;        // Tham chiếu đến Player
@@ -46,6 +46,7 @@ public class MapManager : MonoBehaviour
             tile = Instantiate(groundTilePrefab, position, Quaternion.identity, transform);
         }
         tile.name = $"Tile_{row}_{col}";
+        tile.transform.SetParent(transform.GetChild(1));
         groundTiles.Add(tile);
     }
 
@@ -56,7 +57,7 @@ public class MapManager : MonoBehaviour
         GameObject startTile = GetTileAt(player.gridPosition.x, player.gridPosition.y);
         if (startTile != null)
         {
-            player.SetPlayerPositionAndRotation(
+            player.transform.SetPositionAndRotation(
                 CorrectOffsetPosition(startTile.transform.position, 1f),
                 Quaternion.LookRotation(RotationCorrection(new Vector3(player.direction.x, 0, player.direction.y)))
             );
@@ -65,6 +66,11 @@ public class MapManager : MonoBehaviour
         {
             Debug.LogError("Start tile does not exist. Check gridPosition.");
         }
+    }
+
+    void PlacePlaceholderEnemy(Vector3 position)
+    {
+        
     }
 
     public GameObject GetTileAt(int row, int col)
