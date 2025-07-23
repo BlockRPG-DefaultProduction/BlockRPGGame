@@ -12,10 +12,15 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     private CanvasGroup canvasGroup;
     void Awake()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        tileActionManager = FindFirstObjectByType<TileActionManager>();
+        tileActionManager = FindFirstObjectByType<TileActionManager>(); 
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -81,6 +86,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 TileBehavior instanceTileBehavior = instance.GetComponent<TileBehavior>();
                 instanceTileBehavior.canBeDuplicated = false;
                 tileActionManager.AddTile(instance);
+                instanceTileBehavior.Initialize();
             }
         }
     }

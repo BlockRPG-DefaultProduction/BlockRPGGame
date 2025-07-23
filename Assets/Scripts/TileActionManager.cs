@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TileActionManager : MonoBehaviour
 {
+    public int limit = 5;
     public event Action OnTileListChange;
     public List<GameObject> tileToExecute = new List<GameObject>();
 
@@ -14,6 +15,12 @@ public class TileActionManager : MonoBehaviour
         if (tile == null || tileToExecute.Contains(tile))
         {
             Debug.LogWarning("Tile is null or already exists in the list.");
+            return;
+        }
+        if (tileToExecute.Count >= limit)
+        {
+            Debug.LogWarning("Tile limit reached, cannot add more tiles.");
+            Destroy(tile);
             return;
         }
         tileToExecute.Add(tile);

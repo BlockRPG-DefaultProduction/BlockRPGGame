@@ -19,12 +19,6 @@ public class PlacementBarBehavior : MonoBehaviour, IDropHandler
         GameObject droppedTile = eventData.pointerDrag;
         if (droppedTile != null)
         {
-            if (tileActionManager.tileToExecute.Count >= limit)
-            {
-                Debug.LogWarning("Tile limit reached, cannot add more tiles.");
-                Destroy(droppedTile);
-                return;
-            }
             RectTransform droppedRectTransform = droppedTile.GetComponent<RectTransform>();
 
             TileBehavior tileBehavior = droppedTile.GetComponent<TileBehavior>();
@@ -35,7 +29,7 @@ public class PlacementBarBehavior : MonoBehaviour, IDropHandler
             }
             if (tileBehavior != null)
             {
-                tileActionManager   .AddTile(droppedTile);
+                tileActionManager.AddTile(droppedTile);
             }
             RerenderGameObjectOnListChange(); // Rerender tile anyway
         }
