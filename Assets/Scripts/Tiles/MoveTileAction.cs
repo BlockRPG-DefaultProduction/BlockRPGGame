@@ -14,18 +14,18 @@ public class MoveTileAction : AbstractTileAction
     public override void Invoke()
     {
         base.Invoke();
-        Vector2Int nextPos = player.gridPosition + player.direction;
+        Vector2Int nextPos = entity.gridPosition + entity.direction;
         GameObject nextTile = map.GetTileAt(nextPos.x, nextPos.y);
         if (nextTile != null)
         {
-            startPosition = player.transform.position;
+            startPosition = entity.transform.position;
             targetPosition = CorrectOffsetPosition(nextTile.transform.position, 1f);
 
             startTime = Time.time;
-            travelTime = Vector3.Distance(startPosition, targetPosition) / player.velocity;
+            travelTime = Vector3.Distance(startPosition, targetPosition) / entity.velocity;
 
-            player.gridPosition = nextPos;
-            player.playerAnimation.SetBool("IsMoving", true);
+            entity.gridPosition = nextPos;
+            entity.entityAnimation.SetBool("IsMoving", true);
         }
         else
         {
@@ -38,11 +38,11 @@ public class MoveTileAction : AbstractTileAction
     {
         float elapsedTime = Time.time - startTime;
         float t = elapsedTime / travelTime;
-        player.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+        entity.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
         if (t >= 1f)
         {
-            player.transform.position = targetPosition;
-            player.playerAnimation.SetBool("IsMoving", false);
+            entity.transform.position = targetPosition;
+            entity.entityAnimation.SetBool("IsMoving", false);
             Complete();
         }
     }

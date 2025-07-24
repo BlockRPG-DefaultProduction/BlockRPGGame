@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: battleStateManager
       value: 
       objectReference: {fileID: 628846096}
+    - target: {fileID: 5635944573810721612, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
+      propertyPath: PlayerTileActionManager
+      value: 
+      objectReference: {fileID: 628846096}
     - target: {fileID: 6846289308245545354, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
       propertyPath: m_Name
       value: DragAndDropUI
@@ -429,11 +433,6 @@ Transform:
   - {fileID: 732106257}
   m_Father: {fileID: 2000911176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &512937981 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2118755377041577822, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
-  m_PrefabInstance: {fileID: 936115343}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &628846094
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +444,7 @@ GameObject:
   - component: {fileID: 628846095}
   - component: {fileID: 628846096}
   m_Layer: 0
-  m_Name: BattleState
+  m_Name: PlayerTileActionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -478,7 +477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dc71bdfe03ca2438bab53e1630b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  limit: 5
   tileToExecute: []
+  playerBehavior: {fileID: 732106259}
 --- !u!4 &732106257 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 71810719897851199, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
@@ -489,7 +490,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
   m_PrefabInstance: {fileID: 936115343}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512937981}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a80de296a335434db44f5db1f6a7b86, type: 3}
@@ -618,9 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isExecuting: 0
-  canConstantlyExecute: 0
-  player: {fileID: 732106259}
-  playerObject: {fileID: 512937981}
+  entity: {fileID: 0}
   clockWise: 0
 --- !u!1 &1270315705 stripped
 GameObject:
@@ -640,9 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isExecuting: 0
-  canConstantlyExecute: 0
-  player: {fileID: 732106259}
-  playerObject: {fileID: 0}
+  entity: {fileID: 0}
   map: {fileID: 2000911177}
 --- !u!1 &1561884448
 GameObject:
@@ -723,6 +720,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1673841550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1673841551}
+  - component: {fileID: 1673841552}
+  m_Layer: 0
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1673841551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673841550}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1673841552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673841550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8c5cffa544c5d4da551eb28a81111a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridSize: 7
+  turnCount: 0
 --- !u!1 &1831103045
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,9 +1013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isExecuting: 0
-  canConstantlyExecute: 1
-  player: {fileID: 732106259}
-  playerObject: {fileID: 512937981}
+  entity: {fileID: 0}
   attackPower: 1
 --- !u!114 &1869049326
 MonoBehaviour:
@@ -1052,7 +1093,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilePrefab: {fileID: 605819496227720192, guid: 6d49442d6d6242044bd9850f6c18654e, type: 3}
   alternativeGroundTilePrefab: {fileID: 4348198542725149555, guid: ae02882c566f44143873924fa2460089, type: 3}
-  gridSize: 7
+  enemyPrefab: {fileID: 8964602136969729715, guid: abfde7111ff60044f8bc692319c8c9f3, type: 3}
+  battleManager: {fileID: 1673841552}
   tileSpacing: 2
   timeToGenerate: 0.01
 --- !u!1 &2134153387 stripped
@@ -1073,15 +1115,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isExecuting: 0
-  canConstantlyExecute: 0
-  player: {fileID: 732106259}
-  playerObject: {fileID: 512937981}
+  entity: {fileID: 0}
   clockWise: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1561884451}
+  - {fileID: 1673841551}
   - {fileID: 628846095}
   - {fileID: 14713357}
   - {fileID: 1831103047}

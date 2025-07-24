@@ -7,11 +7,11 @@ public class PlacementBarBehavior : MonoBehaviour, IDropHandler
     public float tileWidth = 64f;
     public int limit = 5;
     private RectTransform rectTransform;
-    private TileActionManager tileActionManager;
+    private PlayerTileActionManager tileActionManager;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        tileActionManager = FindFirstObjectByType<TileActionManager>();
+        tileActionManager = FindFirstObjectByType<PlayerTileActionManager>();
         tileActionManager.OnTileListChange += RerenderGameObjectOnListChange;
     }
     public void OnDrop(PointerEventData eventData)

@@ -2,11 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
-
     public bool canBeDuplicated = true;
     public int id = 0;
-
-    private TileActionManager tileActionManager;
+    
+    // Private fields for managing the tile's behavior
+    private PlayerTileActionManager PlayerTileActionManager;
     private RectTransform rectTransform;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -20,7 +20,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        tileActionManager = FindFirstObjectByType<TileActionManager>(); 
+        PlayerTileActionManager = FindFirstObjectByType<PlayerTileActionManager>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -57,7 +57,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         if (eventData.pointerCurrentRaycast.gameObject == null ||
             eventData.pointerCurrentRaycast.gameObject.GetComponent<PlacementBarBehavior>() == null)
         {
-            tileActionManager.RemoveTile(gameObject);
+            PlayerTileActionManager.RemoveTile(gameObject);
             Destroy(gameObject);
         }
         canvasGroup.blocksRaycasts = true;
@@ -85,7 +85,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 instance.transform.SetParent(transform.parent, false);
                 TileBehavior instanceTileBehavior = instance.GetComponent<TileBehavior>();
                 instanceTileBehavior.canBeDuplicated = false;
-                tileActionManager.AddTile(instance);
+                PlayerTileActionManager.AddTile(instance);
                 instanceTileBehavior.Initialize();
             }
         }

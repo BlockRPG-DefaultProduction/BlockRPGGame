@@ -6,9 +6,10 @@ public class MapManager : MonoBehaviour
 {
     public GameObject groundTilePrefab;             // Prefab mặt đất
     public GameObject alternativeGroundTilePrefab; // Prefab mặt đất thay thế
-    public int gridSize = 5;             // Kích thước lưới, ví dụ 4 hoặc 5
+    public GameObject enemyPrefab;             // Prefab kẻ thù
+    public BattleManager battleManager; // Tham chiếu đến BattleManager
+    private int gridSize;          // Kích thước lưới, mặc định là 5x5
     public float tileSpacing = 1.1f;     // Khoảng cách giữa các tile
-
     public float timeToGenerate = 0.01f; // Thời gian tạo tile
 
     private List<GameObject> groundTiles = new List<GameObject>();
@@ -17,11 +18,22 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<PlayerBehavior>();
-        StartCoroutine(GenerateGrid());
+        GenerateGrid();
         PlacePlayer(); // Đặt player sau khi sinh xong map
+        PlacePlaceholderEnemy(3);
     }
 
-    private IEnumerator GenerateGrid()
+    void Awake()
+    {
+        gridSize = battleManager.gridSize;
+        if (gridSize <= 0)
+        {
+            Debug.LogError("Grid size must be greater than 0. Using default size of 5.");
+            gridSize = 5; // Đặt kích thước lưới mặc định nếu không được chỉ định
+        }
+    }
+
+    void GenerateGrid()
     {
         for (int row = 0; row < gridSize; row++)
         {
@@ -29,13 +41,13 @@ public class MapManager : MonoBehaviour
             {
                 Vector3 position = new Vector3(col * tileSpacing, 0, row * tileSpacing);
                 InstantiateTile(position, row, col);
-                yield return new WaitForSeconds(timeToGenerate);
             }
         }
         
     }
 
     // Little Instantiate Animation
+    // Should this be needed?
     void InstantiateTile(Vector3 position, int row, int col)
     {
         GameObject tile;
@@ -61,6 +73,7 @@ public class MapManager : MonoBehaviour
                 CorrectOffsetPosition(startTile.transform.position, 1f),
                 Quaternion.LookRotation(RotationCorrection(new Vector3(player.direction.x, 0, player.direction.y)))
             );
+            battleManager.grid[player.gridPosition.x, player.gridPosition.y] = player.gameObject;
         }
         else
         {
@@ -68,9 +81,27 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    void PlacePlaceholderEnemy(Vector3 position)
+    void PlacePlaceholderEnemy(int amount = 1)
     {
-        
+        for (int i = 0; i < amount; i++)
+        {
+            Vector2Int randomPos = new Vector2Int(Random.Range(0, gridSize), Random.Range(0, gridSize));
+            // Kiểm tra xem ô đã có kẻ thù hay chưa
+            while (battleManager.grid[randomPos.x, randomPos.y] != null)
+            {
+                randomPos = new Vector2Int(Random.Range(0, gridSize), Random.Range(0, gridSize));
+            }
+            GameObject tile = GetTileAt(randomPos.x, randomPos.y);
+            if (tile != null)
+            {
+                GameObject enemy = Instantiate(enemyPrefab, CorrectOffsetPosition(tile.transform.position, 1f), Quaternion.identity, transform);
+                enemy.transform.SetParent(transform.GetChild(0));
+                enemy.name = $"Enemy_{randomPos.x}_{randomPos.y}";
+                enemy.GetComponent<EnemyBehavior>().gridPosition = randomPos;
+                battleManager.grid[randomPos.x, randomPos.y] = enemy;
+            
+            }
+        }
     }
 
     public GameObject GetTileAt(int row, int col)

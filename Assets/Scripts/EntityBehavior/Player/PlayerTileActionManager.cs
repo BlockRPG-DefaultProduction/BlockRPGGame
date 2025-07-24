@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileActionManager : MonoBehaviour
+public class PlayerTileActionManager : MonoBehaviour
 {
     public int limit = 5;
     public event Action OnTileListChange;
     public List<GameObject> tileToExecute = new List<GameObject>();
+    public PlayerBehavior playerBehavior;
 
     // Tile List Adders and Removers Methods
     public void AddTile(GameObject tile)
@@ -61,6 +62,7 @@ public class TileActionManager : MonoBehaviour
         foreach (var tile in tileToExecute)
         {
             AbstractTileAction action = tile.GetComponent<AbstractTileAction>();
+            action.entity = playerBehavior;
             action.Invoke();
             yield return new WaitUntil(() => !action.isExecuting);
         }
