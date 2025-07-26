@@ -54,8 +54,6 @@ public class PlayerTileActionManager : MonoBehaviour
         OnTileListChange?.Invoke();
     }
 
-    [Obsolete("This is a dumb idea in general. What? Invoke Action directly? Too bad enemy didnt have that luxury.")]
-    // Ignore the obsolete, new monobehavior is fine
     public void ExecuteAction()
     {
         if (tileToExecute.Count == 0)
@@ -66,7 +64,6 @@ public class PlayerTileActionManager : MonoBehaviour
 
         StartCoroutine(ExecuteActionsCoroutine());
     }
-    [Obsolete("This is a dumb idea in general. What? Invoke Action directly? Too bad enemy didnt have that luxury.")]
     IEnumerator ExecuteActionsCoroutine()
     {
         foreach (var tile in tileToExecute)

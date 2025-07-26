@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,20 +15,25 @@ public class BattleManager : MonoBehaviour
     {
 
         grid = new GameObject[gridSize, gridSize];
-        NextTurn(); // Bắt đầu lượt đầu tiên
-        activeEntity.NextTurn += NextTurn; // Subscribe to the NextTurn event
+        
     }
-
+    void Start()
+    {
+        StartCoroutine(DelayedInit());
+    }
+    private IEnumerator DelayedInit()
+    {
+        yield return new WaitForSeconds(1f); // Đợi một khung hình để đảm bảo các đối tượng đã được khởi tạo
+        if (entities.Count > 0)
+        {
+            NextTurn();
+        }
+    }
     public void NextTurn()
     {
         turnCount++;
         Debug.Log($"Turn {turnCount + 1} started.");
-        if (turnCount >= entities.Count)
-        {
-            turnCount = 0; // Reset turn count if it exceeds the number of entities
-        } 
-
-        activeEntity = entities[turnCount];
+        activeEntity = entities[turnCount % entities.Count];
         activeEntity.StartTurn();
     }
 }

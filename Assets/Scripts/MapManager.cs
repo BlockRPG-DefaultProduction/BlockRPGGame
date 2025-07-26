@@ -75,6 +75,7 @@ public class MapManager : MonoBehaviour
             );
             battleManager.grid[player.gridPosition.x, player.gridPosition.y] = player.gameObject;
             battleManager.entities.Add(player);
+            player.NextTurn += battleManager.NextTurn; // Subscribe to the NextTurn event
         }
         else
         {
@@ -101,6 +102,7 @@ public class MapManager : MonoBehaviour
                 enemy.GetComponent<EnemyBehavior>().gridPosition = randomPos;
                 battleManager.grid[randomPos.x, randomPos.y] = enemy;
                 battleManager.entities.Add(enemy.GetComponent<EnemyBehavior>());
+                enemy.GetComponent<EnemyBehavior>().NextTurn += battleManager.NextTurn; // Subscribe to the NextTurn event
             }
         }
     }

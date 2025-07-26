@@ -13,12 +13,13 @@ public class PlayerBehavior : EntityBehavior
     public override void StartTurn()
     {
         base.StartTurn();
+        tileActionManager.canBeAdded = true; // Allow adding tiles for this turn
         foreach (Transform child in playerUI.transform)
         {
             child.gameObject.SetActive(true);
         }
     }
-
+    // At turn is handled by PlayerTileActionManager, so we don't need to override it here.
     public override void CompleteTurn()
     {
         foreach (Transform child in playerUI.transform)
@@ -27,11 +28,6 @@ public class PlayerBehavior : EntityBehavior
             {
                 // If the child is not in the tileToExecute list or is not a PlacementBarBehavior, hide it
                 child.gameObject.SetActive(false);
-            }
-            else
-            {
-                // If it is a valid tile, ensure it is visible
-                child.gameObject.SetActive(true);
             }
         }
         tileActionManager.ClearTile(true);

@@ -34,8 +34,11 @@ public class EnemyBehavior : EntityBehavior
     {
         foreach (var action in actions)
         {
-            action.Invoke();
-            yield return new WaitUntil(() => !action.isExecuting);
+           if (action != null)
+            {
+                action.Invoke();
+                yield return new WaitForSeconds(1f); // Delay between actions
+            }
         }
     }
 }
