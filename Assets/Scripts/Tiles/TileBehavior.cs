@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler //IHideable
 {
     public bool canBeDuplicated = true;
     public int id = 0;
-    
+
     // Private fields for managing the tile's behavior
     private PlayerTileActionManager PlayerTileActionManager;
     private RectTransform rectTransform;
@@ -90,4 +90,5 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
             }
         }
     }
+
 }

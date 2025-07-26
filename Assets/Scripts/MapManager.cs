@@ -74,6 +74,7 @@ public class MapManager : MonoBehaviour
                 Quaternion.LookRotation(RotationCorrection(new Vector3(player.direction.x, 0, player.direction.y)))
             );
             battleManager.grid[player.gridPosition.x, player.gridPosition.y] = player.gameObject;
+            battleManager.entities.Add(player);
         }
         else
         {
@@ -99,7 +100,7 @@ public class MapManager : MonoBehaviour
                 enemy.name = $"Enemy_{randomPos.x}_{randomPos.y}";
                 enemy.GetComponent<EnemyBehavior>().gridPosition = randomPos;
                 battleManager.grid[randomPos.x, randomPos.y] = enemy;
-            
+                battleManager.entities.Add(enemy.GetComponent<EnemyBehavior>());
             }
         }
     }

@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 public class EntityBehavior : MonoBehaviour
 {
+    // THIS SHOULD BE A SCRIPTABLEOBJECT, WHY?
     // Entity Attributes:
     public float velocity = 5f;
     public float rotationSpeed = 180f; // Độ xoay mỗi giây
@@ -11,8 +13,10 @@ public class EntityBehavior : MonoBehaviour
     public bool isAtTurn = false; // Biến để kiểm tra xem entity có đang ở lượt của nó hay không
 
     // Entity Components:
+    public BattleManager battleManager;
     public Animator entityAnimation;
     private MapManager map;
+    public event Action NextTurn;
     
     void Start()
     {
@@ -46,5 +50,6 @@ public class EntityBehavior : MonoBehaviour
     public virtual void CompleteTurn()
     {
         isAtTurn = false;
+        NextTurn?.Invoke();
     }
 }

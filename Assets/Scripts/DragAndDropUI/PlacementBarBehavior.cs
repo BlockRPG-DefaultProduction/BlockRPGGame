@@ -1,13 +1,12 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
 public class PlacementBarBehavior : MonoBehaviour, IDropHandler
 {
     public float tileWidth = 64f;
     public int limit = 5;
     private RectTransform rectTransform;
     private PlayerTileActionManager tileActionManager;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

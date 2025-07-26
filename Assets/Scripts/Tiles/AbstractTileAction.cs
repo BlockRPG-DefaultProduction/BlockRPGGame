@@ -1,12 +1,13 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
+// Do i need to not extend MonoBehaviour?
 public abstract class AbstractTileAction : MonoBehaviour
 {
     public bool isExecuting = false; // Biến để kiểm tra xem hành động có đang thực thi hay không
     public EntityBehavior entity;
+    public BattleManager battleManager;
 
+    // The culprit is this
     void Update()
     {
         if (isExecuting)

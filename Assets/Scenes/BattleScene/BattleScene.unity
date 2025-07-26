@@ -155,6 +155,18 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 5a6cabbf8734c7048a236a3b11200bb5, type: 3}
+    - target: {fileID: 5556458946538923633, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 628846096}
+    - target: {fileID: 5556458946538923633, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExecuteAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 5556458946538923633, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerTileActionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5635944573810721612, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
       propertyPath: player
       value: 
@@ -215,7 +227,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5635944573810721612, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2428877700780426489, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
@@ -433,6 +446,11 @@ Transform:
   - {fileID: 732106257}
   m_Father: {fileID: 2000911176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &608253622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6846289308245545354, guid: e6da1e8fff242d54fb13065977f2501a, type: 3}
+  m_PrefabInstance: {fileID: 14713357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &628846094
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dc71bdfe03ca2438bab53e1630b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBeAdded: 1
   limit: 5
   tileToExecute: []
   playerBehavior: {fileID: 732106259}
@@ -581,6 +600,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 608253622}
+    - target: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
       propertyPath: direction.x
       value: 0
       objectReference: {fileID: 0}
@@ -589,9 +612,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
+      propertyPath: battleManager
+      value: 
+      objectReference: {fileID: 1673841552}
+    - target: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
       propertyPath: rotationSpeed
       value: 720
       objectReference: {fileID: 0}
+    - target: {fileID: 393313602384857780, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
+      propertyPath: tileActionManager
+      value: 
+      objectReference: {fileID: 628846096}
     - target: {fileID: 2118755377041577822, guid: 4320570e782a7304c950feb18f03f3fc, type: 3}
       propertyPath: m_Name
       value: Player
@@ -620,6 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isExecuting: 0
   entity: {fileID: 0}
+  battleManager: {fileID: 0}
   clockWise: 0
 --- !u!1 &1270315705 stripped
 GameObject:
@@ -640,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isExecuting: 0
   entity: {fileID: 0}
+  battleManager: {fileID: 0}
   map: {fileID: 2000911177}
 --- !u!1 &1561884448
 GameObject:
@@ -765,7 +798,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 7
-  turnCount: 0
+  turnCount: -1
+  entities: []
+  activeEntity: {fileID: 0}
 --- !u!1 &1831103045
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +1023,7 @@ PrefabInstance:
       addedObject: {fileID: 1869049326}
     - targetCorrespondingSourceObject: {fileID: 2173151745706889324, guid: 8ac82364e1be5684fb40e982508b2da7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1869049325}
+      addedObject: {fileID: 1869049327}
   m_SourcePrefab: {fileID: 100100000, guid: 8ac82364e1be5684fb40e982508b2da7, type: 3}
 --- !u!224 &1869049323 stripped
 RectTransform:
@@ -1000,21 +1035,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2173151745706889324, guid: 8ac82364e1be5684fb40e982508b2da7, type: 3}
   m_PrefabInstance: {fileID: 1869049322}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1869049325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869049324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac5d677ae276911438c07cd14b48caa4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isExecuting: 0
-  entity: {fileID: 0}
-  attackPower: 1
 --- !u!114 &1869049326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,6 +1065,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1869049327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869049324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d677ae276911438c07cd14b48caa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isExecuting: 0
+  entity: {fileID: 732106259}
+  battleManager: {fileID: 1673841552}
+  attackPower: 1
 --- !u!1 &2000911175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isExecuting: 0
   entity: {fileID: 0}
+  battleManager: {fileID: 0}
   clockWise: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

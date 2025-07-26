@@ -24,6 +24,7 @@ public class MoveTileAction : AbstractTileAction
             startTime = Time.time;
             travelTime = Vector3.Distance(startPosition, targetPosition) / entity.velocity;
 
+            battleManager.grid[entity.gridPosition.x, entity.gridPosition.y] = null;
             entity.gridPosition = nextPos;
             entity.entityAnimation.SetBool("IsMoving", true);
         }
@@ -32,7 +33,7 @@ public class MoveTileAction : AbstractTileAction
             Debug.Log("Invalid move. Outside map.");
             Complete();
         }
-        
+
     }
     public override void Action()
     {
@@ -45,5 +46,11 @@ public class MoveTileAction : AbstractTileAction
             entity.entityAnimation.SetBool("IsMoving", false);
             Complete();
         }
+    }
+
+    public override void Complete()
+    {
+        battleManager.grid[entity.gridPosition.x, entity.gridPosition.y] = entity.gameObject;   
+        base.Complete();
     }
 }
