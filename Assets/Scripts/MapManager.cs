@@ -88,7 +88,6 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             Vector2Int randomPos = new Vector2Int(Random.Range(0, gridSize), Random.Range(0, gridSize));
-            // Kiểm tra xem ô đã có kẻ thù hay chưa
             while (battleManager.grid[randomPos.x, randomPos.y] != null)
             {
                 randomPos = new Vector2Int(Random.Range(0, gridSize), Random.Range(0, gridSize));
@@ -96,16 +95,23 @@ public class MapManager : MonoBehaviour
             GameObject tile = GetTileAt(randomPos.x, randomPos.y);
             if (tile != null)
             {
-                GameObject enemy = Instantiate(enemyPrefab, CorrectOffsetPosition(tile.transform.position, 1f), Quaternion.identity, transform);
+                GameObject enemy = Instantiate(enemyPrefab, transform);
+                EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
+                enemy.transform.SetPositionAndRotation(
+                    CorrectOffsetPosition(tile.transform.position, 1f),
+                    Quaternion.LookRotation(RotationCorrection(new Vector3(enemyBehavior.direction.x, 0, enemyBehavior.direction.y)))
+                );
                 enemy.transform.SetParent(transform.GetChild(0));
                 enemy.name = $"Enemy_{randomPos.x}_{randomPos.y}";
-                enemy.GetComponent<EnemyBehavior>().gridPosition = randomPos;
+                enemyBehavior.gridPosition = randomPos;
                 battleManager.grid[randomPos.x, randomPos.y] = enemy;
-                battleManager.entities.Add(enemy.GetComponent<EnemyBehavior>());
-                enemy.GetComponent<EnemyBehavior>().NextTurn += battleManager.NextTurn; // Subscribe to the NextTurn event
+                battleManager.entities.Add(enemyBehavior);
+                enemyBehavior.battleManager = battleManager; // Set the BattleManager reference
+                enemyBehavior.NextTurn += battleManager.NextTurn; // Subscribe to the NextTurn event
             }
         }
     }
+    
 
     public GameObject GetTileAt(int row, int col)
     {

@@ -19,7 +19,6 @@ public class PlayerBehavior : EntityBehavior
             child.gameObject.SetActive(true);
         }
     }
-    // At turn is handled by PlayerTileActionManager, so we don't need to override it here.
     public override void CompleteTurn()
     {
         foreach (Transform child in playerUI.transform)

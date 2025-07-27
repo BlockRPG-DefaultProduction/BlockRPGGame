@@ -22,11 +22,10 @@ public class RotateTileAction : AbstractTileAction
         float elapsedTime = Time.time - startTime;
         float t = elapsedTime / executionTime;
         entity.transform.Rotate(Vector3.up * entity.rotationSpeed * Time.deltaTime * (clockWise ? -1 : 1));
-        if (t >= 1f)
+        if (t >= 0.98f)
         {
             entity.transform.rotation = Quaternion.LookRotation(RotationCorrection(new Vector3(entity.direction.x, 0, entity.direction.y)));
             Complete();
-            Debug.Log("Finished rotating to direction: " + entity.direction);
         }
     }
 

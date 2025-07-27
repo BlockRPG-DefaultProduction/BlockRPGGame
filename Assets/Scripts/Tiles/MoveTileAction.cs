@@ -11,6 +11,15 @@ public class MoveTileAction : AbstractTileAction
     private float startTime;
 
     [SerializeField] private MapManager map;
+
+    void Awake()
+    {
+        map = FindFirstObjectByType<MapManager>();
+        if (map == null)
+        {
+            Debug.LogError("MapManager not found in the scene!");
+        }
+    }
     public override void Invoke()
     {
         base.Invoke();
@@ -18,6 +27,12 @@ public class MoveTileAction : AbstractTileAction
         GameObject nextTile = map.GetTileAt(nextPos.x, nextPos.y);
         if (nextTile != null)
         {
+            if (battleManager.grid[nextPos.x, nextPos.y] != null)
+            {
+                Debug.Log("Invalid move. Tile occupied by another entity.");
+                Complete();
+                return;
+            }
             startPosition = entity.transform.position;
             targetPosition = CorrectOffsetPosition(nextTile.transform.position, 1f);
 

@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTileActionManager : MonoBehaviour
+public class PlayerTileActionManager : EntityTileActionManager
 {
-    public event Action exectionFinished; // Event to notify when an action is finished
+    // Player Specific Tile Action Manager
+    // Inherits from EntityTileActionManager to manage player-specific tile actions
     public bool canBeAdded = false; // Biến để kiểm tra xem có thể thêm hành động vào danh sách hay không
     public int limit = 5;
     public event Action OnTileListChange;
-    public List<GameObject> tileToExecute = new List<GameObject>();
-    public PlayerBehavior playerBehavior;
-    
 
     // Tile List Adders and Removers Methods
     public void AddTile(GameObject tile)
@@ -53,28 +51,4 @@ public class PlayerTileActionManager : MonoBehaviour
         tileToExecute.Clear();
         OnTileListChange?.Invoke();
     }
-
-    public void ExecuteAction()
-    {
-        if (tileToExecute.Count == 0)
-        {
-            Debug.LogWarning("No actions to execute.");
-            return;
-        }
-
-        StartCoroutine(ExecuteActionsCoroutine());
-    }
-    IEnumerator ExecuteActionsCoroutine()
-    {
-        foreach (var tile in tileToExecute)
-        {
-            AbstractTileAction action = tile.GetComponent<AbstractTileAction>();
-            action.entity = playerBehavior;
-            action.battleManager = playerBehavior.battleManager;
-            action.Invoke();
-            yield return new WaitUntil(() => !action.isExecuting);
-        }
-        exectionFinished?.Invoke();
-    }
-    
 }

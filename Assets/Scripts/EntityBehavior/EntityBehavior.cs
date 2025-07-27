@@ -3,6 +3,7 @@ using UnityEngine;
 public class EntityBehavior : MonoBehaviour
 {
     // THIS SHOULD BE A SCRIPTABLEOBJECT, WHY?
+    // its okay
     // Entity Attributes:
     public float velocity = 5f;
     public float rotationSpeed = 180f; // Độ xoay mỗi giây
@@ -29,6 +30,7 @@ public class EntityBehavior : MonoBehaviour
         }
     }
     // Entity Turn Basic Logic:
+    // This is seperate from action logic, which is handled by EntityTileActionManager
     void Update()
     {
         if (isAtTurn)
