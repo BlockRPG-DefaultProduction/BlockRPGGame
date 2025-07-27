@@ -13,9 +13,7 @@ public class BattleManager : MonoBehaviour
 
     void Awake()
     {
-
         grid = new GameObject[gridSize, gridSize];
-        
     }
     void Start()
     {

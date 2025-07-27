@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d005c1b032fdec046a225d6cc79adae4, type: 3}
   m_Name: EnemyMoves
   m_EditorClassIdentifier: 
-  moves: []
+  moves:
+  - moveName: Move
+    tiles:
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+  - moveName: RotateLeft
+    tiles:
+    - {fileID: 2113810418939901797, guid: e52824f5f6bd2b54189fac77f877d3ee, type: 3}
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+  - moveName: RotateRight
+    tiles:
+    - {fileID: 1143868921562440822, guid: 1320ca0ea808af648ab4b45ff9bcfa6c, type: 3}
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}

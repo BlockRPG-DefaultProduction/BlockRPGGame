@@ -7,6 +7,7 @@ public class EntityBehavior : MonoBehaviour
     // Entity Attributes:
     public float velocity = 5f;
     public float rotationSpeed = 180f; // Độ xoay mỗi giây
+    public int health = 1;
 
     // Entity States:
     public Vector2Int gridPosition = new Vector2Int(0, 0); // (row, col) trong grid
