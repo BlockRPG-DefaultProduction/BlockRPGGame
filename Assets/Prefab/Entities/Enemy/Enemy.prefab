@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 5
   rotationSpeed: 180
+  health: 1
   gridPosition: {x: 0, y: 0}
   direction: {x: 0, y: 1}
   isAtTurn: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
   thinkingTime: 1
   tilePrefabList: {fileID: 11400000, guid: c3dda07a9b817694fa0f3356e9a466f4, type: 2}
   enemyTileActionManager: {fileID: 641425606820751213}
+  deathEffect: {fileID: 7726475628855786615, guid: 18325871163ca534f85750c16cd70580, type: 3}
 --- !u!1001 &3856258883294861170
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -23,8 +23,10 @@ public abstract class AbstractTileAction : MonoBehaviour
 
     // Action: Action that is called when the tile action is executed
     // Similar to Update() in MonoBehaviour, but for tile actions
-    public abstract void Action();
+    public virtual void Action()
+    {
 
+    }
     // Complete: Action that is called when the tile action is completed
     // Similar to OnDestroy() in MonoBehaviour, but for tile actions
     public virtual void Complete()

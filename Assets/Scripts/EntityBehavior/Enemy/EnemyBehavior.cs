@@ -7,6 +7,8 @@ public class EnemyBehavior : EntityBehavior
     public TilePrefabList tilePrefabList; // Reference to the TilePrefabList for enemy actions
     public EnemyTileActionManager enemyTileActionManager; // Reference to the EnemyTileActionManager
 
+    public GameObject deathEffect; // Effect to instantiate on death
+
     void Awake()
     {
         enemyTileActionManager.exectionFinished += CompleteTurn; // Subscribe to the event to complete the turn when actions are finished
@@ -41,11 +43,20 @@ public class EnemyBehavior : EntityBehavior
         }
         enemyTileActionManager.ExecuteAction(); // Execute the actions
     }
-    
+
     public override void CompleteTurn()
     {
         enemyTileActionManager.ClearActions(true); // Clear actions after completing the turn
         base.CompleteTurn();
+    }
+    
+    public override void OnDeath()
+    {
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity); // Instantiate the death effect at the enemy's position
+        }
+        base.OnDeath(); // Call the base method to handle common death logic
     }
     
 }

@@ -19,7 +19,12 @@ public class EntityBehavior : MonoBehaviour
     public Animator entityAnimation;
     private MapManager map;
     public event Action NextTurn;
-    
+    public event Action<EntityBehavior> EntityDeath;
+
+    void Awake()
+    {
+
+    }
     void Start()
     {
         map = FindFirstObjectByType<MapManager>();
@@ -38,6 +43,12 @@ public class EntityBehavior : MonoBehaviour
         {
             AtTurn();
         }
+
+        if (health <= 0)
+        {
+            battleManager.entities.Remove(this);
+            Destroy(gameObject, 2f); // Destroy the entity after 2 seconds
+        }
     }
 
     public virtual void StartTurn()
@@ -54,5 +65,10 @@ public class EntityBehavior : MonoBehaviour
     {
         isAtTurn = false;
         NextTurn?.Invoke();
+    }
+
+    public virtual void OnDeath()
+    {
+        
     }
 }
