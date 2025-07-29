@@ -4,17 +4,11 @@ using UnityEngine;
 using static Utilities.VectorHelper;
 public class MapManager : MonoBehaviour
 {
-    public GameObject groundTilePrefab;             // Prefab mặt đất
-    public GameObject alternativeGroundTilePrefab; // Prefab mặt đất thay thế
-    public GameObject enemyPrefab;             // Prefab kẻ thù
+    public StageSetting stageSetting; // Tham chiếu đến StageSetting
     public BattleManager battleManager; // Tham chiếu đến BattleManager
-    private int gridSize;          // Kích thước lưới, mặc định là 5x5
-    public float tileSpacing = 1.1f;     // Khoảng cách giữa các tile
-    public float timeToGenerate = 0.01f; // Thời gian tạo tile
-
     private List<GameObject> groundTiles = new List<GameObject>();
     private PlayerBehavior player;        // Tham chiếu đến Player
-
+    private int gridSize; // Kích thước lưới
     void Start()
     {
         player = FindFirstObjectByType<PlayerBehavior>();
@@ -39,7 +33,7 @@ public class MapManager : MonoBehaviour
         {
             for (int col = 0; col < gridSize; col++)
             {
-                Vector3 position = new Vector3(col * tileSpacing, 0, row * tileSpacing);
+                Vector3 position = new Vector3(col * 2 + stageSetting.tileSpacing, 0, row * 2 + stageSetting.tileSpacing);
                 InstantiateTile(position, row, col);
             }
         }
@@ -53,9 +47,9 @@ public class MapManager : MonoBehaviour
         GameObject tile;
         if ((row + col) % 2 == 0)
         {
-            tile = Instantiate(alternativeGroundTilePrefab, position, Quaternion.identity, transform);
+            tile = Instantiate(stageSetting.alternativeGroundTilePrefab, position, Quaternion.identity, transform);
         } else {
-            tile = Instantiate(groundTilePrefab, position, Quaternion.identity, transform);
+            tile = Instantiate(stageSetting.groundTilePrefab, position, Quaternion.identity, transform);
         }
         tile.name = $"Tile_{row}_{col}";
         tile.transform.SetParent(transform.GetChild(1));
@@ -95,7 +89,7 @@ public class MapManager : MonoBehaviour
             GameObject tile = GetTileAt(randomPos.x, randomPos.y);
             if (tile != null)
             {
-                GameObject enemy = Instantiate(enemyPrefab, transform);
+                GameObject enemy = Instantiate(stageSetting.enemyPrefabs[Random.Range(0, stageSetting.enemyPrefabs.Count)], transform);
                 EnemyBehavior enemyBehavior = enemy.GetComponent<EnemyBehavior>();
                 enemy.transform.SetPositionAndRotation(
                     CorrectOffsetPosition(tile.transform.position, 1f),
