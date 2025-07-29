@@ -8,6 +8,7 @@ public class EntityBehavior : MonoBehaviour
     public float velocity = 5f;
     public float rotationSpeed = 180f; // Độ xoay mỗi giây
     public int health = 1;
+    private bool isDead = false;
 
     // Entity States:
     public Vector2Int gridPosition = new Vector2Int(0, 0); // (row, col) trong grid
@@ -19,8 +20,7 @@ public class EntityBehavior : MonoBehaviour
     public Animator entityAnimation;
     private MapManager map;
     public event Action NextTurn;
-    public event Action<EntityBehavior> EntityDeath;
-
+    
     void Awake()
     {
 
@@ -44,10 +44,11 @@ public class EntityBehavior : MonoBehaviour
             AtTurn();
         }
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
-            battleManager.entities.Remove(this);
-            Destroy(gameObject, 2f); // Destroy the entity after 2 seconds
+            isDead = true; // Set isDead to true to prevent multiple calls
+            OnDeath();         
+            
         }
     }
 
@@ -69,6 +70,7 @@ public class EntityBehavior : MonoBehaviour
 
     public virtual void OnDeath()
     {
-        
+        battleManager.entities.Remove(this);
+        Destroy(gameObject); // Destroy the entity after 2 seconds
     }
 }

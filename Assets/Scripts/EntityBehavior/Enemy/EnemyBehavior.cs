@@ -54,7 +54,12 @@ public class EnemyBehavior : EntityBehavior
     {
         if (deathEffect != null)
         {
-            Instantiate(deathEffect, transform.position, Quaternion.identity); // Instantiate the death effect at the enemy's position
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity); // Instantiate the death effect at the enemy's position
+            var ps = effect.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                Destroy(effect, ps.main.duration + ps.main.startLifetime.constantMax);
+            }
         }
         base.OnDeath(); // Call the base method to handle common death logic
     }
