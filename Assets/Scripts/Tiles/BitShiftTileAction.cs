@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class BitShiftTileAction : AbstractTileAction
@@ -39,21 +38,4 @@ public class BitShiftTileAction : AbstractTileAction
             Complete();
         }
     }
-    
-
-    public override void Complete()
-    {
-        // if (target != null && target.GetComponent<EntityBehavior>() != null)
-        // {
-        //     if (target.GetComponent<EntityBehavior>().health <= 0)
-        //     {
-        //         Debug.Log($"{target.name} has been defeated.");
-        //         battleManager.entities.Remove(target.GetComponent<EntityBehavior>());
-        //         Destroy(target, 2f);
-        //     }
-        // }
-        base.Complete();
-    }
-
-
 }
