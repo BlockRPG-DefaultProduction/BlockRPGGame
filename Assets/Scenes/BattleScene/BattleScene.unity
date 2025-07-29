@@ -472,6 +472,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2858381028544349471, guid: e6952691b323e2146afe7e704e9224ce, type: 3}
+      propertyPath: mapManager
+      value: 
+      objectReference: {fileID: 2000911177}
     - target: {fileID: 3906803224292431549, guid: e6952691b323e2146afe7e704e9224ce, type: 3}
       propertyPath: m_Name
       value: InitalizeVariableTile

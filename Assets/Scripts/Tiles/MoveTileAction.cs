@@ -33,6 +33,7 @@ public class MoveTileAction : AbstractTileAction
                 Complete();
                 return;
             }
+            entity.entityAnimation.SetBool("IsMoving", true);
             startPosition = entity.transform.position;
             targetPosition = CorrectOffsetPosition(nextTile.transform.position, 1f);
 
@@ -41,7 +42,6 @@ public class MoveTileAction : AbstractTileAction
 
             battleManager.grid[entity.gridPosition.x, entity.gridPosition.y] = null;
             entity.gridPosition = nextPos;
-            entity.entityAnimation.SetBool("IsMoving", true);
         }
         else
         {
@@ -58,13 +58,14 @@ public class MoveTileAction : AbstractTileAction
         if (t >= 1f)
         {
             entity.transform.position = targetPosition;
-            entity.entityAnimation.SetBool("IsMoving", false);
+            
             Complete();
         }
     }
 
     public override void Complete()
     {
+        entity.entityAnimation.SetBool("IsMoving", false);
         battleManager.grid[entity.gridPosition.x, entity.gridPosition.y] = entity.gameObject;   
         base.Complete();
     }

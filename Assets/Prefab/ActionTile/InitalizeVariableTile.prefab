@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4364698407002185918, guid: a069884849a7c984ab7dab91e8463142, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -394.57
+      value: -113.5
       objectReference: {fileID: 0}
     - target: {fileID: 4364698407002185918, guid: a069884849a7c984ab7dab91e8463142, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -99,5 +99,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1996871860437875562, guid: a069884849a7c984ab7dab91e8463142, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2858381028544349471}
   m_SourcePrefab: {fileID: 100100000, guid: a069884849a7c984ab7dab91e8463142, type: 3}
+--- !u!1 &3906803224292431549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1996871860437875562, guid: a069884849a7c984ab7dab91e8463142, type: 3}
+  m_PrefabInstance: {fileID: 3279061114390998487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2858381028544349471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3906803224292431549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03017bed722c4d947b47d163e62366d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isExecuting: 0
+  entity: {fileID: 0}
+  battleManager: {fileID: 0}
+  mapManager: {fileID: 0}
