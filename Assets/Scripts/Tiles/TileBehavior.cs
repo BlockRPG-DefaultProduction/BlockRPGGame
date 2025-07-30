@@ -44,7 +44,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
             }
             id++;
             GameObject instance = Instantiate(gameObject);
-            instance.name = "Tile" + id;
+            instance.name = name + id;
             instance.transform.SetParent(transform.parent, false);
             instance.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
             instance.GetComponent<TileBehavior>().canBeDuplicated = true;
@@ -81,7 +81,7 @@ public class TileBehavior : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 }
                 id++;
                 GameObject instance = Instantiate(gameObject);
-                instance.name = "Tile" + id;
+                instance.name = name + id;
                 instance.transform.SetParent(transform.parent, false);
                 TileBehavior instanceTileBehavior = instance.GetComponent<TileBehavior>();
                 instanceTileBehavior.canBeDuplicated = false;
