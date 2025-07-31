@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3be79f7a12ca34f80fc08ba3b04d97, type: 3}
+  m_Name: StartTile
+  m_EditorClassIdentifier: 
+  tileSets:
+  - setName: Basic Movement
+    TileList:
+    - {fileID: 7195962628671744575, guid: bfc40c480b4d8c84590e61731cf2961e, type: 3}
+    - {fileID: 2113810418939901797, guid: e52824f5f6bd2b54189fac77f877d3ee, type: 3}
+    - {fileID: 1143868921562440822, guid: 1320ca0ea808af648ab4b45ff9bcfa6c, type: 3}
+  - setName: Attack
+    TileList:
+    - {fileID: 265511399761768269, guid: 22a246f4a1f0a0a4b856ea4ec504c38d, type: 3}
+  - setName: Variable
+    TileList:
+    - {fileID: 3906803224292431549, guid: e6952691b323e2146afe7e704e9224ce, type: 3}
+    - {fileID: 7602795452093524740, guid: 39f6edd8111134a47b1efff8d09dd45c, type: 3}
+    - {fileID: 2964413828972619726, guid: d66453192d1327a419969eee12f03b97, type: 3}

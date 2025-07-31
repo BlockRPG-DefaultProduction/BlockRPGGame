@@ -70,7 +70,13 @@ public class EntityBehavior : MonoBehaviour
 
     public virtual void OnDeath()
     {
+        int removedIndex = battleManager.entities.IndexOf(this);
         battleManager.entities.Remove(this);
+
+        if (battleManager.turnCount >= removedIndex)
+        {
+        battleManager.turnCount--;
+        }
         Destroy(gameObject); // Destroy the entity after 2 seconds
     }
 }
