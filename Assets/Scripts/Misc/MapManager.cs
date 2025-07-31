@@ -65,7 +65,7 @@ public class MapManager : MonoBehaviour
         {
             player.transform.SetPositionAndRotation(
                 CorrectOffsetPosition(startTile.transform.position, 1f),
-                Quaternion.LookRotation(RotationCorrection(new Vector3(player.direction.x, 0, player.direction.y)))
+                Quaternion.LookRotation(new Vector3(player.direction.x, 0, player.direction.y))
             );
             battleManager.grid[player.gridPosition.x, player.gridPosition.y] = player.gameObject;
             battleManager.entities.Add(player);
