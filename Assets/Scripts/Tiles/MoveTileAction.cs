@@ -33,7 +33,7 @@ public class MoveTileAction : AbstractTileAction
                 Complete();
                 return;
             }
-            entity.entityAnimation.SetBool("IsMoving", true);
+            AnimationTrigger("Moving");
             startPosition = entity.transform.position;
             targetPosition = CorrectOffsetPosition(nextTile.transform.position, 1f);
 
@@ -50,6 +50,18 @@ public class MoveTileAction : AbstractTileAction
         }
 
     }
+
+    void AnimationTrigger(string triggerName)
+    {
+        if (entity.entityAnimation != null)
+        {
+            entity.entityAnimation.SetTrigger(triggerName);
+        }
+        else
+        {
+            Debug.LogError("entityAnimation is null!");
+        }
+    }
     public override void Action()
     {
         float elapsedTime = Time.time - startTime;
@@ -58,14 +70,14 @@ public class MoveTileAction : AbstractTileAction
         if (t >= 1f)
         {
             entity.transform.position = targetPosition;
-            
+
             Complete();
         }
     }
 
     public override void Complete()
     {
-        entity.entityAnimation.SetBool("IsMoving", false);
+        AnimationTrigger("Stop");
         battleManager.grid[entity.gridPosition.x, entity.gridPosition.y] = entity.gameObject;   
         base.Complete();
     }

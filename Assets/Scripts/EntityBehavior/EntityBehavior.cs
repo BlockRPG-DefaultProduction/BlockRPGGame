@@ -29,10 +29,13 @@ public class EntityBehavior : MonoBehaviour
     {
         map = FindFirstObjectByType<MapManager>();
 
-        entityAnimation = GetComponentInChildren<Animator>();
         if (entityAnimation == null)
         {
+            entityAnimation = GetComponentInChildren<Animator>();
+            if (entityAnimation == null)
+            {
             Debug.LogError("EntityAnimation component not found!");
+            }
         }
     }
     // Entity Turn Basic Logic:
