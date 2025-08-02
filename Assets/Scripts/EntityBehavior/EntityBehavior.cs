@@ -14,6 +14,7 @@ public class EntityBehavior : MonoBehaviour
     public Vector2Int gridPosition = new Vector2Int(0, 0); // (row, col) trong grid
     public Vector2Int direction = Vector2Int.up; // Hướng mặc định: tiến lên (Y+)
     public bool isAtTurn = false; // Biến để kiểm tra xem entity có đang ở lượt của nó hay không
+    public Vector2Int selectedTilePosition = new Vector2Int(0, 0); // Vị trí ô được chọn
 
     // Entity Components:
     public BattleManager battleManager;
