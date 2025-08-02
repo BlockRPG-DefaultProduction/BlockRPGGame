@@ -55,6 +55,11 @@ public class MoveTileAction : AbstractTileAction
     {
         if (entity.entityAnimation != null)
         {
+            Debug.Log($"Triggering animation: {triggerName}");
+            if (entity.entityAnimation.isActiveAndEnabled == false)
+            {
+                Debug.LogWarning("EntityAnimation is not active. Animation may not play.");
+            }
             entity.entityAnimation.SetTrigger(triggerName);
         }
         else
