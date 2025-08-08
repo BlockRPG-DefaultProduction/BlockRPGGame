@@ -1,7 +1,9 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 public class PlayerBehavior : EntityBehavior
 {
+    public event Action<int, bool> OnHealthChanged;
     public GameObject playerUI;
     public PlayerTileActionManager tileActionManager;
 
@@ -32,5 +34,18 @@ public class PlayerBehavior : EntityBehavior
         tileActionManager.ClearTile(true);
         tileActionManager.canBeAdded = false; // Reset the ability to add tiles for the next turn
         base.CompleteTurn();
+    }
+
+
+    public void AddHealth(int amount)
+    {
+        health += amount;
+        OnHealthChanged?.Invoke(health, true);
+    }
+
+    public void RemoveHealth(int amount)
+    {
+        health -= amount;
+        OnHealthChanged?.Invoke(health, false);
     }
 }

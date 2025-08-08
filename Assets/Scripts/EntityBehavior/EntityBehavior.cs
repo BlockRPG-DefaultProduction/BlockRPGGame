@@ -21,7 +21,7 @@ public class EntityBehavior : MonoBehaviour
     public Animator entityAnimation;
     private MapManager map;
     public event Action NextTurn;
-    
+
     void Awake()
     {
 
@@ -35,7 +35,7 @@ public class EntityBehavior : MonoBehaviour
             entityAnimation = GetComponentInChildren<Animator>();
             if (entityAnimation == null)
             {
-            Debug.LogError("EntityAnimation component not found!");
+                Debug.LogError("EntityAnimation component not found!");
             }
         }
     }
@@ -51,8 +51,8 @@ public class EntityBehavior : MonoBehaviour
         if (health <= 0 && !isDead)
         {
             isDead = true; // Set isDead to true to prevent multiple calls
-            OnDeath();         
-            
+            OnDeath();
+
         }
     }
 
@@ -79,8 +79,9 @@ public class EntityBehavior : MonoBehaviour
 
         if (battleManager.turnCount >= removedIndex)
         {
-        battleManager.turnCount--;
+            battleManager.turnCount--;
         }
         Destroy(gameObject); // Destroy the entity after 2 seconds
     }
+    
 }
